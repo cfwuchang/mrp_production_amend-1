@@ -188,6 +188,7 @@ class StockPickings(models.Model):
     
     
     def action_cancel(self):
+        
         if self.user_id.id != self.env.user.id:
             raise UserError('你不能操作他人的订单7')
         else:
@@ -197,7 +198,12 @@ class StockPickings(models.Model):
                 self.state = 'cancel'
                 return True
             self._action_cancel()
-            return True
+
+            "warning": {
+                'title': '提示!',
+                'message': '你确定要取消吗',
+                }
+                return True
 
     
     def button_unbuild(self):
